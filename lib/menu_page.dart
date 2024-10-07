@@ -7,20 +7,34 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  List<String> menu = ["Ayam Goreng", "Nasi Goreng", "Nasi Uduk", "Bakso Bakar", "Sate padang", "Teh Manis", "Lemon Tea", "Jus Jeruk", "Jus Alpukat", "Kopi"];
-  List<int> prices = [10000, 19000, 22000, 13500, 18000, 4000, 7500, 8000,9000, 4500];
-  List<String> descriptions = [
-    "Ayam goreng ",
-    "Nasi goreng ",
-    "Nasi uduk ayam bakar",
-    "Bakso sapi dengan 5 tusuk berjumlah 20 ",
-    "Sate padang dengan 6 tusuk sate ",
-    "Teh Manis bisa dingin atau panas",
-    "Lemon Tea segar dan nikmat",
-    "Jus Jeruk",
-    "Jus Alpukat",
-    "Kopi",
+  List<String> menu = [
+    "Room Service Ayam Goreng",
+    "Room Service Nasi Goreng",
+    "Room Service Nasi Uduk",
+    "Room Service Bakso Bakar",
+    "Room Service Sate Padang",
+    "Room Service Teh Manis",
+    "Room Service Lemon Tea",
+    "Room Service Jus Jeruk",
+    "Room Service Jus Alpukat",
+    "Room Service Kopi"
   ];
+
+  List<int> prices = [10000, 19000, 22000, 13500, 18000, 4000, 7500, 8000, 9000, 4500];
+
+  List<String> descriptions = [
+    "Ayam goreng ala hotel",
+    "Nasi goreng dengan telur hotel",
+    "Nasi uduk ala chef hotel",
+    "Bakso bakar spesial hotel",
+    "Sate padang hotel dengan saus spesial",
+    "Teh manis hotel",
+    "Lemon tea segar dari hotel",
+    "Jus jeruk segar dari restoran hotel",
+    "Jus alpukat creamy ala hotel",
+    "Kopi spesial hotel",
+  ];
+
   List<String> images = [
     'assets/ayam_goreng.jpeg',
     'assets/nasi_goreng.jpeg',
@@ -33,6 +47,7 @@ class _MenuPageState extends State<MenuPage> {
     'assets/jus_alpukat.jpeg',
     'assets/kopi.jpeg',
   ];
+
   Map<String, int> cart = {};
   List<int> ratings = [5, 4, 4, 5, 3, 5, 4, 5, 4, 4];
   List<bool> liked = [false, false, false, false, false, false, false, false, false, false];
@@ -104,14 +119,12 @@ class _MenuPageState extends State<MenuPage> {
                   ),
                   IconButton(
                     onPressed: () {
-                      // Fungsi untuk membagikan item (share)
                       print("Share ${menu[index]}");
                     },
                     icon: Icon(Icons.share),
                   ),
                   IconButton(
                     onPressed: () {
-                      // Fungsi untuk melaporkan item (report)
                       print("Report ${menu[index]}");
                     },
                     icon: Icon(Icons.report),
@@ -145,14 +158,14 @@ class _MenuPageState extends State<MenuPage> {
                       setState(() {
                         addToCart(menu[index]);
                       });
-                      Navigator.pop(context); //
+                      Navigator.pop(context);
                     },
                     icon: Icon(Icons.add),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       addToCart(menu[index]);
-                      Navigator.pop(context); //
+                      Navigator.pop(context);
                     },
                     child: Text("Add to Cart"),
                   ),
@@ -169,7 +182,7 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Menu Makanan dan Minuman'),
+        title: Text('Hotel Food Service'),
         actions: [
           IconButton(
             icon: Icon(Icons.shopping_cart),
@@ -190,13 +203,13 @@ class _MenuPageState extends State<MenuPage> {
           String item = menu[index];
           return ListTile(
             title: Text(item),
-            subtitle: Text('Rp ${prices[index]}'), //
+            subtitle: Text('Rp ${prices[index]}'),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
                   onPressed: () {
-                    showFoodDetails(index); //
+                    showFoodDetails(index);
                   },
                   icon: Icon(Icons.info),
                 ),

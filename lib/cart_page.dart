@@ -47,7 +47,6 @@ class _CartPageState extends State<CartPage> {
             onPressed: widget.cart.isEmpty
                 ? null
                 : () {
-              // Simulasi pembayaran
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(

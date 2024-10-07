@@ -63,6 +63,10 @@ flutter:
     - assets/jus_jeruk.jpeg
     - assets/jus_alpukat.jpeg
     - assets/kopi.jpeg
+    - assets/kamar_01.jpeg
+    - assets/kamar_02.jpeg
+    - assets/kamar_03.jpeg
+    - assets/kamar_04.jpeg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
