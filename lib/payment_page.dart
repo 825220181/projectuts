@@ -86,7 +86,6 @@ class _PaymentPageState extends State<PaymentPage> {
             SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                // Aksi setelah pembayaran
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
