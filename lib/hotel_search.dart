@@ -1,21 +1,31 @@
 import 'package:flutter/material.dart';
-import 'hotel_page.dart'; //
+// Import halaman pemesanan hotel
+// import 'hotel_page.dart';
 
 void main() {
-  runApp(HotelBookingApp());
+  runApp(MyApp());
 }
 
-class HotelBookingApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: HotelSearchScreen(),
+      debugShowCheckedModeBanner: false, // Menonaktifkan banner debug
     );
   }
 }
 
-class HotelSearchScreen extends StatelessWidget {
+class HotelSearchScreen extends StatefulWidget {
+  @override
+  _HotelSearchScreenState createState() => _HotelSearchScreenState();
+}
+
+class _HotelSearchScreenState extends State<HotelSearchScreen> {
+  DateTime checkInDate = DateTime(2023, 11, 15);
+  DateTime checkOutDate = DateTime(2023, 11, 20);
+  String cityName = 'Delhi';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,56 +33,59 @@ class HotelSearchScreen extends StatelessWidget {
         title: Text('Hotel Search'),
         backgroundColor: Colors.green,
       ),
-      body: Padding(
+      backgroundColor: Colors.white, // Menambahkan warna latar belakang
+      body: SingleChildScrollView( // Tambahkan SingleChildScrollView untuk menghindari overflow
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'City / Area / Hotel Name',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
-            ),
-            SizedBox(height: 8),
             TextField(
               decoration: InputDecoration(
-                hintText: 'Delhi',
+                labelText: 'City / Area / Hotel Name',
+                hintText: cityName,
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 16.0),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _DateSelector(label: 'Check In', date: '10 Jun 2019, Sunday'),
-                _DateSelector(label: 'Check Out', date: '15 Jun 2019, Monday'),
-              ],
-            ),
-            SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '1 Room, 1 Guest',
-                  style: TextStyle(fontSize: 16),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () => _selectDate(context, true),
+                    child: _buildDateField(
+                      'Check In',
+                      '${checkInDate.day} ${_monthName(checkInDate.month)} ${checkInDate.year}',
+                    ),
+                  ),
                 ),
-                Icon(Icons.arrow_forward_ios, size: 16),
+                SizedBox(width: 8.0),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () => _selectDate(context, false),
+                    child: _buildDateField(
+                      'Check Out',
+                      '${checkOutDate.day} ${_monthName(checkOutDate.month)} ${checkOutDate.year}',
+                    ),
+                  ),
+                ),
               ],
             ),
-            Spacer(),
+            SizedBox(height: 16.0),
+            _buildRoomGuestField(),
+            SizedBox(height: 24.0),
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HotelReservationPage(),
-                    ),
-                  );
+                  // Pastikan halaman ini ada di proyek Anda atau berikan navigasi alternatif
+                  print("Search Hotel button pressed"); // Debugging print statement
                 },
-                child: Text('Search Hotel'),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  backgroundColor: Colors.green, // Ganti 'primary' dengan 'backgroundColor'
+                  padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 15.0),
+                ),
+                child: Text(
+                  'Search Hotel',
+                  style: TextStyle(fontSize: 16),
                 ),
               ),
             ),
@@ -81,35 +94,65 @@ class HotelSearchScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-class _DateSelector extends StatelessWidget {
-  final String label;
-  final String date;
+  Future<void> _selectDate(BuildContext context, bool isCheckIn) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: isCheckIn ? checkInDate : checkOutDate,
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != (isCheckIn ? checkInDate : checkOutDate)) {
+      setState(() {
+        if (isCheckIn) {
+          checkInDate = picked;
+        } else {
+          checkOutDate = picked;
+        }
+      });
+    }
+  }
 
-  const _DateSelector({required this.label, required this.date});
+  String _monthName(int month) {
+    List<String> monthNames = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+    return monthNames[month - 1];
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(fontSize: 16, color: Colors.grey),
-        ),
-        SizedBox(height: 8),
-        Row(
-          children: [
-            Text(
-              date,
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(width: 8),
-            Icon(Icons.calendar_today, size: 16),
-          ],
-        ),
-      ],
+  Widget _buildDateField(String label, String date) {
+    return Container(
+      padding: EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: TextStyle(color: Colors.grey)),
+          SizedBox(height: 5.0),
+          Text(date, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRoomGuestField() {
+    return Container(
+      padding: EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Rooms & Guests', style: TextStyle(color: Colors.grey)),
+          SizedBox(height: 5.0),
+          Text('1 Room, 1 Guest', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        ],
+      ),
     );
   }
 }

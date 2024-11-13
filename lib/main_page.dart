@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'hotel_page.dart';
 import 'menu_page.dart';
+import 'hotel_search.dart';
 
 void main() {
   runApp(MyApp());
