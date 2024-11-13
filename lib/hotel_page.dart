@@ -42,7 +42,6 @@ class _HotelReservationPageState extends State<HotelReservationPage> {
     "Mountain view, Non-smoking, Air conditioning",
     "Pool view, Free Wi-Fi, Balcony, Minibar"
   ];
-
   List<int> roomQuantities = [1, 1, 1, 1];
 
   void showRoomDetails(int index) {
@@ -73,48 +72,41 @@ class _HotelReservationPageState extends State<HotelReservationPage> {
                           roomNames[index],
                           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Icon(Icons.aspect_ratio, size: 20, color: Colors.grey),
-                            SizedBox(width: 8),
-                            Text(roomSizes[index]),
-                            SizedBox(width: 16),
-                            Icon(Icons.location_city, size: 20, color: Colors.grey),
-                            SizedBox(width: 8),
-                            Text(roomViews[index]),
-                            SizedBox(width: 16),
-                            Icon(Icons.stairs, size: 20, color: Colors.grey),
-                            SizedBox(width: 8),
-                            Text('Floor: ${roomFloors[index]}'),
-                          ],
+                        Text(
+                          '${roomSizes[index]}, ${roomViews[index]}, Floor: ${roomFloors[index]}',
+                          style: TextStyle(fontSize: 16, color: Colors.grey),
                         ),
                         SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Icon(Icons.wifi, size: 20, color: Colors.grey),
-                            SizedBox(width: 8),
-                            Text("Free Wi-Fi"),
-                            SizedBox(width: 16),
-                            Icon(Icons.smoke_free, size: 20, color: Colors.grey),
-                            SizedBox(width: 8),
-                            Text("Non-smoking"),
-                          ],
+                        Text(
+                          'IDR ${roomPrices[index]} per night',
+                          style: TextStyle(fontSize: 20, color: Colors.green),
                         ),
                         SizedBox(height: 16),
+                        Divider(),
                         Text(
-                          'For ${bedDetails[index]}, ${mealInfo[index]}',
-                          style: TextStyle(fontSize: 16, color: Colors.black),
+                          "Facilities",
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          roomFacilities[index],
+                          style: TextStyle(fontSize: 14, color: Colors.black),
+                        ),
+                        SizedBox(height: 16),
+                        Divider(),
+                        Text(
+                          "Bed & Meal Information",
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 8),
                         Text(
                           bedDetails[index],
                           style: TextStyle(fontSize: 16, color: Colors.black),
                         ),
-                        SizedBox(height: 8),
+                        SizedBox(height: 4),
                         Text(
-                          'Rp ${roomPrices[index]}',
-                          style: TextStyle(fontSize: 20, color: Colors.green),
+                          mealInfo[index],
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
                         ),
                         SizedBox(height: 16),
                         Divider(),
@@ -175,7 +167,7 @@ class _HotelReservationPageState extends State<HotelReservationPage> {
                                 ),
                               );
                             },
-                            child: Text("Lanjut ke Pembayaran"),
+                            child: Text("Proceed to Payment"),
                           ),
                         ),
                         Center(
@@ -183,7 +175,7 @@ class _HotelReservationPageState extends State<HotelReservationPage> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Text("Kembali"),
+                            child: Text("Back"),
                           ),
                         ),
                       ],
@@ -207,20 +199,63 @@ class _HotelReservationPageState extends State<HotelReservationPage> {
       body: ListView.builder(
         itemCount: roomNames.length,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(roomNames[index]),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Fasilitas: ${roomFacilities[index]}'),
-                Text('Rp ${roomPrices[index]}'),
-              ],
-            ),
-            trailing: ElevatedButton(
-              onPressed: () {
-                showRoomDetails(index);
-              },
-              child: Text('Pesan'),
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Card(
+              elevation: 3,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      bottomLeft: Radius.circular(12),
+                    ),
+                    child: Image.asset(
+                      roomImages[index],
+                      height: 80,
+                      width: 80,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          roomNames[index],
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          roomFacilities[index],
+                          style: TextStyle(fontSize: 12, color: Colors.grey),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'IDR ${roomPrices[index]} per night',
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.purple),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        showRoomDetails(index);
+                      },
+                      child: Text('View'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white, // Button color
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },
