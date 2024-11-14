@@ -23,24 +23,28 @@ class _HotelReservationPageState extends State<HotelReservationPage> {
     'assets/kamar_02.jpeg',
     'assets/kamar_03.jpeg',
     'assets/kamar_04.jpeg',
+    'assets/kamar_05.jpg',
   ];
   List<String> bedDetails = [
     "1 king bed (1.81m wide)",
     "1 queen bed",
     "2 twin beds",
     "1 king bed, 1 sofa bed",
+    "1 king bed (1.81m wide)",
   ];
   List<String> mealInfo = [
     "Meals not included. Breakfast: Rp 115,000 per person",
     "Meals included",
     "Meals not included",
     "Meals included",
+    "Meals not included",
   ];
   List<String> amenities = [
     "City view, Balcony, Bathtub, Deep Soaking Bathtub, Private bathroom, Air conditioning, Hair dryer, Refrigerator, Minibar",
     "Garden view, Free Wi-Fi, Refrigerator, Minibar",
     "Mountain view, Non-smoking, Air conditioning",
     "Pool view, Free Wi-Fi, Balcony, Minibar"
+    "Garden view, Free Wi-Fi, Minibar"
   ];
   List<int> roomQuantities = [1, 1, 1, 1];
 

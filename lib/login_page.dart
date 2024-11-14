@@ -39,6 +39,14 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  void _loginWithGoogle() {
+    // Implement Google login functionality here
+  }
+
+  void _loginWithFacebook() {
+    // Implement Facebook login functionality here
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +59,13 @@ class _LoginPageState extends State<LoginPage> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10,
+                  offset: Offset(0, 4),
+                ),
+              ],
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -65,6 +80,15 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: 20),
+                Text(
+                  'Welcome Back!',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[800],
+                  ),
+                ),
+                SizedBox(height: 10),
                 TextField(
                   controller: _usernameController,
                   decoration: InputDecoration(
@@ -102,7 +126,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextButton(
                       onPressed: () {
-                        // Implementasi lupa password bisa ditambahkan di sini
                       },
                       child: Text(
                         "Forgot Password?",
@@ -120,6 +143,41 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: Colors.red[900],
                     foregroundColor: Colors.white,
                   ),
+                ),
+                SizedBox(height: 20),
+                Text("Or login with"),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.facebook),
+                      color: Colors.blue,
+                      iconSize: 40,
+                      onPressed: _loginWithFacebook,
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.outgoing_mail),
+                      color: Colors.red,
+                      iconSize: 40,
+                      onPressed: _loginWithGoogle,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don't have an account?"),
+                    TextButton(
+                      onPressed: () {
+                      },
+                      child: Text(
+                        "Sign Up",
+                        style: TextStyle(color: Colors.red[900]),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
