@@ -7,7 +7,7 @@ class HotelReservationPage extends StatefulWidget {
 }
 
 class _HotelReservationPageState extends State<HotelReservationPage> {
-  List<String> roomNames = ["Junior Suite", "Kamar 02", "Kamar 03", "Kamar 04"];
+  List<String> roomNames = ["Kamar 1", "Kamar 02", "Kamar 03", "Kamar 04"];
   List<int> roomPrices = [350000, 350000, 250000, 250000];
   List<String> roomSizes = ["39m²", "30m²", "25m²", "28m²"];
   List<String> roomFloors = ["1,2,3,5", "2,4", "1,3", "5"];
@@ -44,7 +44,7 @@ class _HotelReservationPageState extends State<HotelReservationPage> {
     "Garden view, Free Wi-Fi, Refrigerator, Minibar",
     "Mountain view, Non-smoking, Air conditioning",
     "Pool view, Free Wi-Fi, Balcony, Minibar"
-    "Garden view, Free Wi-Fi, Minibar"
+    "Garden view, Free Wi-Fi, MinibarWWWWWWWWWWW"
   ];
   List<int> roomQuantities = [1, 1, 1, 1];
 

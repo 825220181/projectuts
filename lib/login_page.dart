@@ -15,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
     final username = _usernameController.text;
     final password = _passwordController.text;
 
-    if (username == 'untar' && password == 'untar123') {
+    if (username == 'untar12@gmail.com' && password == 'untar123') {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => MainPage()),
@@ -40,11 +40,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _loginWithGoogle() {
-    // Implement Google login functionality here
   }
 
   void _loginWithFacebook() {
-    // Implement Facebook login functionality here
   }
 
   @override
@@ -81,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  'Welcome Back!',
+                  'Welcome ',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

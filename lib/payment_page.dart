@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'payment_history_page.dart';
 
 class PaymentPage extends StatefulWidget {
   final String roomName;
@@ -22,6 +23,13 @@ class _PaymentPageState extends State<PaymentPage> {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+
+  final Map<String, String> paymentAccounts = {
+    'bca_transfer': '1234567890 (Hotel Reservation)',
+    'bri_transfer': '9876543210 (Hotel Reservation)',
+  };
+
+  List<Map<String, dynamic>> paymentHistory = [];
 
   @override
   void initState() {
@@ -55,6 +63,20 @@ class _PaymentPageState extends State<PaymentPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.roomName),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.history),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      PaymentHistoryPage(paymentHistory: paymentHistory),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -143,23 +165,15 @@ class _PaymentPageState extends State<PaymentPage> {
                 _updateButtonState();
               },
             ),
-            RadioListTile(
-              title: Row(
-                children: [
-                  Icon(Icons.credit_card, size: 30, color: Colors.blue),
-                  SizedBox(width: 10),
-                  Text("Credit Card"),
-                ],
+            if (selectedPaymentMethod != null &&
+                paymentAccounts.containsKey(selectedPaymentMethod))
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: Text(
+                  "No. Rekening: ${paymentAccounts[selectedPaymentMethod!]}",
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                ),
               ),
-              value: 'credit_card',
-              groupValue: selectedPaymentMethod,
-              onChanged: (value) {
-                setState(() {
-                  selectedPaymentMethod = value.toString();
-                });
-                _updateButtonState();
-              },
-            ),
             SizedBox(height: 20),
             Divider(),
             SizedBox(height: 10),
@@ -180,6 +194,18 @@ class _PaymentPageState extends State<PaymentPage> {
             ElevatedButton(
               onPressed: isButtonEnabled
                   ? () {
+                setState(() {
+                  paymentHistory.add({
+                    'name':
+                    "${firstNameController.text} ${lastNameController.text}",
+                    'email': emailController.text,
+                    'paymentMethod': selectedPaymentMethod,
+                    'totalPrice': totalPrice,
+                    'date': DateTime.now().toLocal().toString().split(' ')[0],
+                  });
+                  print("Payment History Updated: $paymentHistory"); // Debug log
+                });
+
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(

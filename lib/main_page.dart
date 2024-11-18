@@ -5,6 +5,7 @@ import 'login_page.dart';
 import 'hotel_page.dart';
 import 'menu_page.dart';
 import 'hotel_search.dart';
+import 'payment_history_page.dart';
 
 void main() {
   runApp(MyApp());
