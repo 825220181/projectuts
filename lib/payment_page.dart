@@ -27,6 +27,7 @@ class _PaymentPageState extends State<PaymentPage> {
   final Map<String, String> paymentAccounts = {
     'bca_transfer': '1234567890 (Hotel Reservation)',
     'bri_transfer': '9876543210 (Hotel Reservation)',
+    'ovo': '081234567890 (Hotel Reservation)',
   };
 
   List<Map<String, dynamic>> paymentHistory = [];
@@ -131,6 +132,7 @@ class _PaymentPageState extends State<PaymentPage> {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
+            // Payment methods
             RadioListTile(
               title: Row(
                 children: [
@@ -157,6 +159,23 @@ class _PaymentPageState extends State<PaymentPage> {
                 ],
               ),
               value: 'bri_transfer',
+              groupValue: selectedPaymentMethod,
+              onChanged: (value) {
+                setState(() {
+                  selectedPaymentMethod = value.toString();
+                });
+                _updateButtonState();
+              },
+            ),
+            RadioListTile(
+              title: Row(
+                children: [
+                  Image.asset('assets/ovo.jpeg', height: 30),
+                  SizedBox(width: 10),
+                  Text("OVO"),
+                ],
+              ),
+              value: 'ovo',
               groupValue: selectedPaymentMethod,
               onChanged: (value) {
                 setState(() {
@@ -203,7 +222,6 @@ class _PaymentPageState extends State<PaymentPage> {
                     'totalPrice': totalPrice,
                     'date': DateTime.now().toLocal().toString().split(' ')[0],
                   });
-                  print("Payment History Updated: $paymentHistory"); // Debug log
                 });
 
                 showDialog(

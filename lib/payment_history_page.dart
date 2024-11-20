@@ -7,7 +7,6 @@ class PaymentHistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Debug log untuk memastikan data diterima dengan benar
     print("Payment History Received: $paymentHistory");
 
     return Scaffold(
