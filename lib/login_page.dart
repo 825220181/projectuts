@@ -15,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
     final username = _usernameController.text;
     final password = _passwordController.text;
 
-    if (username == 'untar12@gmail.com' && password == 'untar123') {
+    if (username == 'kelompok' && password == '8252200') {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => MainPage()),
@@ -40,9 +40,11 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _loginWithGoogle() {
+    // Implement Google login functionality here
   }
 
   void _loginWithFacebook() {
+    // Implement Facebook login functionality here
   }
 
   @override
@@ -79,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  'Welcome ',
+                  'Welcome Back!',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -91,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _usernameController,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.person),
-                    labelText: 'Email ID',
+                    labelText: 'Username',
                     border: OutlineInputBorder(),
                   ),
                 ),
@@ -123,8 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     TextButton(
-                      onPressed: () {
-                      },
+                      onPressed: () {},
                       child: Text(
                         "Forgot Password?",
                         style: TextStyle(color: Colors.grey),
@@ -168,8 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Text("Don't have an account?"),
                     TextButton(
-                      onPressed: () {
-                      },
+                      onPressed: () {},
                       child: Text(
                         "Sign Up",
                         style: TextStyle(color: Colors.red[900]),

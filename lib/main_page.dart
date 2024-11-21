@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
-import 'hotel_page.dart';
+import 'package:projectuts/screens/sign_up_page.dart';
+import 'package:projectuts/Module/user.dart';
 import 'menu_page.dart';
+import 'hotel_page.dart';
 import 'hotel_search.dart';
 import 'payment_history_page.dart';
 
@@ -15,6 +17,17 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Main Page'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+              );
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -60,7 +73,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: LoginPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => LoginPage(),
+        '/signup': (context) => SignUpPage(),
+        '/main': (context) => MainPage(),
+      },
     );
   }
 }
